@@ -8,13 +8,15 @@ IS_PART_TIME=1
 IS_FULL_TIME=2
 
 randomCheck=$(( RANDOM%3 ))
-if [ $randomCheck -eq $IS_PART_TIME ]
-then
-	empHours=8
-elif [ $randomCheck -eq $IS_FULL_TIME ]
-then
-	empHours=4
-else
-	empHours=0
-fi
+case $randomCheck in
+	1)
+		empHours=4
+		;;
+	2)
+		empHours=8
+		;;
+	*)
+		empHours=0
+		;;
+esac
 dailyWage=$(( $empHours * $WAGE_PER_HOUR ))
