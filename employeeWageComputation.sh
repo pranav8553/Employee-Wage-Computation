@@ -20,17 +20,17 @@ totalWorkingHours=0
 #To get Employee working hours
 function getWorkHours(){
 	randomCheck=$(( RANDOM%3 ))
-		case $randomCheck in
-			$IS_PART_TIME)
-         	empHours=4
-         	;;
-			$IS_FULL_TIME)
-         	empHours=8
-         	;;
-      	*)
-         	empHours=0
-         	;;
-   	esac
+	case $randomCheck in
+		$IS_PART_TIME)
+			empHours=4
+			;;
+		$IS_FULL_TIME)
+			empHours=8
+			;;
+		*)
+			empHours=0
+			;;
+	esac
 	echo $empHours
 }
 
@@ -43,7 +43,7 @@ function calculateWages(){
 
 #Calculate wage till the Days and Hours reached 20 and 100
 function employeeWageComputation() {
-	while [[ totalWorkingDays -le $MAXIMUM_WORKING_DAYS && totalWorkingHours -ne $MAXIMUM_WORKING_HOURS ]]
+	while [[ totalWorkingDays -lt $MAXIMUM_WORKING_DAYS && totalWorkingHours -lt $MAXIMUM_WORKING_HOURS ]]
 	do
 		((totalWorkingDays++))
 		employeeHours=$( getWorkHours )
