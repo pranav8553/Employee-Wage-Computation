@@ -2,6 +2,8 @@
 
 echo -e "WELCOME TO EMPLOYEE WAGE COMPUTATION PROBLEM\n"
 
+declare -a DailyEmployeeWages
+
 #Constants
 WAGE_PER_HOUR=20
 IS_PART_TIME=1
@@ -30,10 +32,18 @@ function getWorkHours(){
 	echo $empHours
 }
 
-while [[ totalWorkingDays -ne $MAXIMUM_WORKING_DAYS && totalWorkingHours -ne $MAXIMUM_WORKING_HOURS ]]
+function calculateWages(){
+	workHours=$1
+	wages=$(( $workHours * $WAGE_PER_HOUR ))
+	echo $wages
+}
+
+
+while [[ totalWorkingDays -le $MAXIMUM_WORKING_DAYS && totalWorkingHours -ne $MAXIMUM_WORKING_HOURS ]]
 do
 	((totalWorkingDays++))
 	employeeHours=$( getWorkHours )
 	totalWorkingHours=$(( $totalWorkingHours + $employeeHours ))
+	DailyEmployeeWages[$totalWorkingDays]=$( calculateWages $employeeHours )
 done
-totalSalery=$(( $totalWorkingHours * $WAGE_PER_HOUR ))
+totalSalery=$( calculateWages $totalWorkingHours )
