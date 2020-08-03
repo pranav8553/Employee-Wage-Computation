@@ -9,10 +9,10 @@ IS_FULL_TIME=2
 
 randomCheck=$(( RANDOM%3 ))
 case $randomCheck in
-	1)
+	$IS_PART_TIME)
 		empHours=4
 		;;
-	2)
+	$IS_FULL_TIME)
 		empHours=8
 		;;
 	*)
