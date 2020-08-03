@@ -14,21 +14,26 @@ MAXIMUM_WORKING_HOURS=100
 totalWorkingDays=0
 totalWorkingHours=0
 
+function getWorkHours(){
+	randomCheck=$(( RANDOM%3 ))
+   	case $randomCheck in
+      	$IS_PART_TIME)
+         	empHours=4
+         	;;
+      	$IS_FULL_TIME)
+         	empHours=8
+         	;;
+      	*)
+         	empHours=0
+         	;;
+   	esac
+	echo $empHours
+}
+
 while [[ totalWorkingDays -ne $MAXIMUM_WORKING_DAYS && totalWorkingHours -ne $MAXIMUM_WORKING_HOURS ]]
 do
 	((totalWorkingDays++))
-	randomCheck=$(( RANDOM%3 ))
-	case $randomCheck in
-		$IS_PART_TIME)
-			empHours=4
-			;;
-		$IS_FULL_TIME)
-			empHours=8
-			;;
-		*)
-			empHours=0
-			;;
-	esac
-	totalWorkingHours=$(( $totalWorkingHours + $empHours ))
+	employeeHours=$( getWorkHours )
+	totalWorkingHours=$(( $totalWorkingHours + $employeeHours ))
 done
 totalSalery=$(( $totalWorkingHours * $WAGE_PER_HOUR ))
